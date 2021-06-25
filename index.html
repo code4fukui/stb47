@@ -1,0 +1,97 @@
+<meta charset="utf-8">
+<style>
+body {
+  --main-bg-color: #333;
+  text-align: center;
+  background-color: #eee;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  background-color: var(--main-bg-color);
+  color: white;
+  font-size: 130%;
+  padding: .5em;
+  text-align: left;
+}
+a {
+  color: #eee !important;
+}
+footer {
+  background-color: var(--main-bg-color);
+  color: white;
+  font-size: 90%;
+  margin-top: 1em;
+  padding: .5em;
+  text-align: left;
+}
+.container {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  x-justify-content: space-between;
+}
+.item {
+  display: inline-block;
+  width: 20%;
+  font-size: 90%;
+  background: var(--main-bg-color);
+  border-radius: .4vw;
+  color: white;
+  margin: 5px;
+  padding: 10px;
+}
+@media screen and (max-width: 1024px) {
+  .item {
+    width: 28%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .item {
+    width: 41%;
+  }
+}
+.item > div {
+  margin-top: .5vw;
+  text-align: left;
+}
+img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+
+}
+</style>
+<script type="module">
+import { h1, create, add, div, css } from "https://js.sabae.cc/stdom.js";
+import { CSV } from "https://js.sabae.cc/CSV.js";
+
+onload = async () => {
+  const url = "./stb47.csv";
+  const data = CSV.toJSON(await CSV.fetch(url));
+  console.log(data);
+  
+  h1("stb47 from ogp");
+  const c = add("div");
+  c.className = "container";
+  for (const d of data) {
+    const div = create("div");
+    div.className = "item";
+    c.appendChild(div);
+    const a = create("a");
+    div.appendChild(a);
+    a.href = d["og:url"];
+    const img = create("img");
+    img.src = d["og:image"];
+    a.appendChild(img);
+    const body = create("div");
+    div.appendChild(body);
+    //body.innerHTML = d["og:title"] + "<br>" + d["og:description"];
+    const shrink = (s) => s.substring("[新商品情報] ".length, s.length - "｜スターバックス コーヒー ジャパン｜スターバックス コーヒー ジャパン".length);
+    body.innerHTML = shrink(d["og:title"]);
+  }
+  const footer = add("footer");
+  footer.innerHTML = "Data by <a href=https://www.starbucks.co.jp/cafe/jimoto_frappuccino/>[新商品情報] 47 JIMOTO Frappuccino®｜スターバックス コーヒー ジャパン</a>、App by <a href=https://github.com/code4fukui/event_fukui>Code for FUKUI</a>";
+};
+</script>
