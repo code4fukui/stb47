@@ -87,9 +87,9 @@ onload = async () => {
     a.appendChild(img);
     const body = create("div");
     div.appendChild(body);
-    //body.innerHTML = d["og:title"] + "<br>" + d["og:description"];
     const shrink = (s) => s.substring("[新商品情報] ".length, s.length - "｜スターバックス コーヒー ジャパン｜スターバックス コーヒー ジャパン".length);
-    body.innerHTML = shrink(d["og:title"]);
+    //body.innerHTML = shrink(d["og:title"]);
+    body.innerHTML = shrink(d["og:title"]) + "<br>" + d["og:description"];
   }
   const footer = add("footer");
   footer.innerHTML = "Data by <a href=https://www.starbucks.co.jp/cafe/jimoto_frappuccino/>[新商品情報] 47 JIMOTO Frappuccino®｜スターバックス コーヒー ジャパン</a>、App by <a href=https://github.com/code4fukui/event_fukui>Code for FUKUI</a>";
