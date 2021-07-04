@@ -34,7 +34,7 @@ footer {
 }
 .item {
   display: inline-block;
-  width: 100%;
+  width: 90%;
   font-size: 90%;
   background: var(--main-bg-color);
   border-radius: .4vw;
@@ -89,8 +89,8 @@ onload = async () => {
     idx++;
   }
   const footer = add("footer");
-  footer.innerHTML = "Data by <a href=https://www.starbucks.co.jp/cafe/jimoto_frappuccino/>[新商品情報] 47 JIMOTO Frappuccino®｜スターバックス コーヒー ジャパン</a>、App by <a href=https://github.com/code4fukui/event_fukui>Code for FUKUI</a>";
+  footer.innerHTML = "Data by <a href=https://www.starbucks.co.jp/cafe/jimoto_frappuccino/>[新商品情報] 47 JIMOTO Frappuccino®｜スターバックス コーヒー ジャパン</a>, App by <a href=https://github.com/code4fukui/stb47>Code for FUKUI</a>, Lib <a href=https://github.com/taisukef/aos-es/>AOS-es</a>"
 
-  AOS.init({ duration: 500 });
+  AOS.init({ duration: 500, delay: 100, offset: 0 });
 };
 </script>
