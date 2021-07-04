@@ -34,7 +34,7 @@ footer {
 }
 .item {
   display: inline-block;
-  width: 100%;
+  width: 20%;
   font-size: 90%;
   background: var(--main-bg-color);
   border-radius: .4vw;
@@ -42,14 +42,22 @@ footer {
   margin: 5px;
   padding: 10px;
 }
+@media screen and (max-width: 1024px) {
+  .item {
+    width: 28%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .item {
+    width: 41%;
+  }
+}
 .item > div {
-  margin-top: 0vw;
+  margin-top: .5vw;
   text-align: left;
 }
 img {
-  width: 40%;
-  float: left;
-  margin-right: 1em;
+  width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
 
@@ -58,7 +66,6 @@ img {
 <script type="module">
 import { h1, create, add, div, css } from "https://js.sabae.cc/stdom.js";
 import { CSV } from "https://js.sabae.cc/CSV.js";
-import { AOS } from "https://taisukef.github.io/aos-es/AOS.js";
 
 onload = async () => {
   const url = "./stb47.csv";
@@ -68,7 +75,6 @@ onload = async () => {
   h1("stb47 from ogp");
   const c = add("div");
   c.className = "container";
-  let idx = 0;
   for (const d of data) {
     const div = create("div");
     div.className = "item";
@@ -84,13 +90,8 @@ onload = async () => {
     const shrink = (s) => s.substring("[新商品情報] ".length, s.length - "｜スターバックス コーヒー ジャパン｜スターバックス コーヒー ジャパン".length);
     //body.innerHTML = shrink(d["og:title"]);
     body.innerHTML = shrink(d["og:title"]) + "<br>" + d["og:description"];
-
-    div.setAttribute("data-aos", idx % 2 == 0 ? "fade-right" : "fade-left");
-    idx++;
   }
   const footer = add("footer");
   footer.innerHTML = "Data by <a href=https://www.starbucks.co.jp/cafe/jimoto_frappuccino/>[新商品情報] 47 JIMOTO Frappuccino®｜スターバックス コーヒー ジャパン</a>、App by <a href=https://github.com/code4fukui/event_fukui>Code for FUKUI</a>";
-
-  AOS.init({ duration: 500 });
 };
 </script>
